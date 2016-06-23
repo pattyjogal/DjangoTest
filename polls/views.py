@@ -25,14 +25,20 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         return Question.objects.order_by('-pub_date')[:5]
 
+
+# With this view, the user can see the question details before voting
 class DetailView(generic.DetailView):
     model = Question
     template_name = 'polls/detail.html'
 
+
+#This view allows the user
 class ResultsView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
 
+
+#This view allows the user to select a response to a given question
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
